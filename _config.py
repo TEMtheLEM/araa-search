@@ -1,4 +1,4 @@
-# The char used to denote bangs (see above constant).
+# The char used to denote bangs (see below constant).
 # EG BANG='!': "!ddg cats" will search "cats" on DuckDuckGo.
 BANG = '!'
 
@@ -18,7 +18,7 @@ SEARCH_BANGS = [
 REPO='https://github.com/Extravi/tailsx'
 
 # Default theme
-DEFAULT_THEME = 'dark'
+DEFAULT_THEME = 'dark_blur'
 
 # The port for this server to listen on
 PORT = 8000
@@ -48,3 +48,5 @@ VALID_UA_PROMPTS = [
     "what's my useragent",
     "what's my user agent",
 ]
+
+COOKIE_AGE = 2147483647

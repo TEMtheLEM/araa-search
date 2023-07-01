@@ -1,10 +1,14 @@
 {% extends "preresults_layout.html" %}
 
 {% block body %}
+    {% if css_style %}
+        <link rel="stylesheet" href="./css/{{ css_style }}">
+    {% endif %}
     <form action="/search" class="search-container" method="get" autocomplete="off">
         <h1>Tails<span class="X">X</span></h1>
         <div class="wrapper">
             <input type="text" name="q" autofocus id="search-input" />
+            <button id="search-wrapper-ico" class="material-icons-round" name="t" value="text" type="submit">search</button>
             <input type="submit" class="hide" />
             <div class="autocomplete">
                 <ul>
@@ -12,7 +16,7 @@
             </div>
         </div>
         <div class="search-button-wrapper">
-            <button name="q" type="submit">Search with TailsX</button>
+            <button name="t" value="text" type="submit">Search with TailsX</button>
             <button name="t" value="image" type="submit">Search images with TailsX</button>
         </div>
         <script defer src="/script.js"></script>
