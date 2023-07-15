@@ -7,7 +7,7 @@ features, improvements & bug fixes.
 
 I only work on the most recent "version" of TailsX. I will not fix any bugs found in older
 "versions" of TailsX; that is, if the bug is not replicable in the current up-to-date commit,
-I will not assist you in fixing such bug.
+I will likely not assist you in fixing such bug.
 
 ## Reporting a Vulnerability
 
