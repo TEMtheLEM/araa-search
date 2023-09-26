@@ -46,19 +46,21 @@
 }
 
 .highlight {
-    color: #bcc0c3;
+    color: var(--highlight);
     font-weight: bold;
     font-style: normal;
 }
 
 .material-icons-round {
-    font-family: 'Material Icons Round';
+    font-family: 'Material Icons Round' !important;
     font-weight: normal;
     font-style: normal;
     font-size: 24px;
     line-height: 1;
     letter-spacing: normal;
     text-transform: none;
+    visibility: hidden;
+    /* will be set to visible if icon pack can be loaded. */
     display: inline-block;
     white-space: nowrap;
     word-wrap: normal;
@@ -70,13 +72,11 @@
 #search-wrapper-ico {
     background: none;
     border: none;
-    color: #8ab4f8;
+    color: var(--blue);
     position: absolute;
     top: 6px;
     right: 10px;
     cursor: pointer;
-    visibility: hidden;
-    /* will be set to visible if icon pack can be loaded. */
 }
 
 #sub-search-wrapper-ico {
@@ -84,14 +84,18 @@
     border: none;
     cursor: pointer;
     font-size: 0px;
+    /* will be set to 17px if icon pack can be loaded. */
     padding-right: 0px;
     margin-right: 0px;
-    visibility: hidden;
-    /* will be set to visible if icon pack can be loaded. */
 }
 
 .fetched_dif {
     margin-top: 110px !important;
+}
+
+.fetched_img {
+    margin-left: 1.2% !important;
+    left: 0px !important;
 }
 
 .clean {
@@ -102,6 +106,11 @@
     left: 175px;
     position: relative;
     max-width: 600px;
+}
+
+.prev-img {
+    left: 0px !important;
+    margin-left: 1.2% !important;
 }
 
 .prev-next button:hover {
@@ -133,15 +142,246 @@ html {
     font-size: 15px;
 }
 
+.calc {
+    height: fit-content;
+    width: fit-content;
+    position: relative;
+    left: 175px;
+    border: 1px solid var(--snip-border);
+    background-color: var(--snip-background);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.calc-btn-style {
+    background-color: var(--html-bg) !important;
+}
+
+.calc-input {
+    width: 90%;
+    height: 10%;
+    background-color: var(--search-bg);
+    border: 1px solid var(--snip-border);
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 8px;
+    text-align: right;
+    max-width: 48em;
+    line-height: 1.58;
+    font-size: 22px;
+    color: var(--fg);
+    letter-spacing: normal;
+    overflow: hidden;
+}
+
+.calc-btn {
+    max-width: 48em;
+    line-height: 50px;
+    font-size: 22px;
+    color: var(--fg);
+    letter-spacing: normal;
+    border-radius: 8px;
+    background-color: var(--search-bg);
+    border: 1px solid var(--snip-border);
+    height: 50px;
+    margin: auto;
+    margin: 4px;
+    width: 80px;
+    text-align: center;
+}
+
+.calc-btn-2 {
+    max-width: 48em;
+    line-height: 50px;
+    font-size: 22px;
+    color: var(--fff);
+    letter-spacing: normal;
+    border-radius: 8px;
+    background-color: var(--blue);
+    height: 50px;
+    margin: auto;
+    margin: 4px;
+    width: 80px;
+    text-align: center;
+}
+
+.calc-btns {
+    display: grid;
+    grid-template-columns: repeat(4, 90px);
+    width: 100%;
+    justify-content: center;
+    padding: 4px;
+}
+
+.calc-pos-absolute {
+    position: absolute;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.prev_calculation {
+    opacity: 0.5;
+    font-size: 14px;
+}
+
+.emoji-code {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .images {
     display: flex;
     flex-wrap: wrap;
+    grid-gap: 1.2rem;
+    justify-content: center;
+    margin-left: 1.2%;
+    margin-right: 35.4%;
+    padding: 0;
+    margin-bottom: 50px;
+}
+
+.image {
+    flex-grow: 1;
+    height: 10rem;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+}
+
+.image:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.image img {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    vertical-align: bottom;
+}
+
+.image_view {
+    position: fixed;
+    width: 33%;
+    height: 82%;
+    z-index: 70;
+    background-color: var(--image-view);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    margin-right: 1.2%;
+    right: 0px;
+}
+
+.image-view-close {
+    background-color: var(--image-view-titlebar);
+    height: 7%;
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: flex-end;
     align-items: center;
-    grid-gap: 1.5rem;
-    margin-left: 9%;
-    margin-right: 9%;
+}
+
+.image-close,
+.image-next,
+.image-before {
+    margin-left: -1px;
+    border-radius: 50%;
+    padding: 5px;
+    color: var(--search-button);
+    font-weight: normal;
+}
+
+.image-close {
+    margin-right: 10px;
+}
+
+.image-close:hover,
+.image-next:hover,
+.image-before:hover {
+    background-color: var(--image-select);
+}
+
+.btn-nostyle {
+    background-color: inherit;
+    border: none;
     padding: 0px;
-    margin-bottom: 40px;
+    width: fit-content;
+}
+
+.view-image {
+    background-color: var(--view-image-color);
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.view-image img {
+    max-width: 100%;
+    max-height: 427px;
+}
+
+.image_view a {
+    text-decoration: none;
+    color: var(--link);
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.image_view a:hover {
+    text-decoration: underline;
+}
+
+.image_view p {
+    margin-left: 20px;
+    margin-right: 20px;
+    display: block;
+}
+
+.image_view a {
+    display: block;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin: 0;
+    padding: 0;
+}
+
+.image_hide {
+    display: none !important;
+}
+
+.image_show {
+    display: initial !important;
+}
+
+.icon_visibility {
+    visibility: visible;
+}
+
+.images_viewer_hidden {
+    margin-right: 1.2% !important;
+}
+
+.image_selected {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 .stats {
@@ -192,13 +432,6 @@ html {
 
 .video__results .results {
     margin-top: 0px;
-}
-
-.images img {
-    margin: 0px;
-    height: 12rem;
-    object-fit: cover;
-    vertical-align: bottom;
 }
 
 .duration {
@@ -255,19 +488,21 @@ html {
 .wrapper:hover,
 .wrapper:focus-within {
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
 }
 
 #theme,
 #lang,
 #safe,
 #open-new-tab,
-#domain {
+#domain,
+#javascript-setting {
     border-radius: 4px;
     padding: 6px;
     font-size: 15px;
     border: 1px solid var(--settings-border);
     color: var(--font-fg);
-    width: 140px;
+    width: 160px;
     background: var(--button);
     margin-right: 330px;
 }
@@ -276,10 +511,12 @@ html {
     border-radius: 4px;
     padding: 6px;
     font-size: 15px;
+    margin-left: -17px;
     border: 1px solid var(--settings-border);
     color: var(--font-fg);
     background: var(--button);
     cursor: pointer;
+    position: absolute;
 }
 
 .settings-nav {
@@ -295,10 +532,18 @@ html {
     border: 1px solid var(--border);
     border-radius: 8px;
     max-width: 620px;
-    height: 440px;
+    height: 570px;
     padding: 10px;
     margin-left: 100px;
     margin-top: 40px;
+}
+
+.kno_wiki {
+    display: none;
+}
+
+.kno_wiki_show {
+    display: initial !important;
 }
 
 .open-in-new-tab * {
@@ -330,6 +575,8 @@ html {
     font-size: 14px;
     background: var(--html-bg);
     border: 1px solid var(--snip-border);
+    margin: 0 !important;
+    position: relative !important;
 }
 
 select.results-settings {
@@ -360,7 +607,7 @@ select.results-settings {
 }
 
 .settings-search-div:hover a {
-    color: #8ab4f8;
+    color: var(--blue);
 }
 
 .settings-results-link,
@@ -371,6 +618,8 @@ select.results-settings {
 
 .settings-results-link {
     margin-left: 24px;
+    display: block;
+    margin-top: 1px;
 }
 
 .wrapper-results input {
@@ -431,10 +680,11 @@ button {
 .search-container h1 {
     font-size: 70px;
     color: var(--font-fg);
+    font-family: 'Inter';
 }
 
 .X {
-    color: #8ab4f8;
+    color: var(--blue);
 }
 
 .search-container input {
@@ -500,6 +750,18 @@ p {
     text-decoration: underline;
 }
 
+.torrent h3 {
+    font-size: 16px !important;
+}
+
+.seeders {
+    color: #31b06e;
+}
+
+.leechers {
+    color: #b0316e;
+}
+
 .results-search-container {
     background-color: var(--search-bg);
     width: 100%;
@@ -530,6 +792,11 @@ p {
 .footer a,
 .footer a:hover,
 .footer a:visited {
+    text-decoration: none;
+    color: var(--footer-font);
+}
+
+.footer a {
     text-decoration: none;
     color: var(--footer-font);
     font-size: 15px;
@@ -594,6 +861,7 @@ p {
 .no-decoration {
     text-decoration: none;
     color: var(--font-fg);
+    font-family: 'Inter';
 }
 
 .no-decoration:hover {
@@ -611,8 +879,9 @@ p {
     border: none;
     background-color: inherit;
     font-size: 14px;
+    font-family: 'Inter';
     margin-right: 14px;
-    color: #BABCBE;
+    color: var(--search-button);
     margin-top: 72px;
     padding-bottom: 11px;
     max-width: 48em;
@@ -623,16 +892,16 @@ p {
 }
 
 .search-active {
-    color: #8ab4f8 !important;
+    color: var(--blue) !important;
 }
 
 .search-container-results-btn {
     display: flex;
-    color: #8ab4f8;
+    color: var(--blue);
 }
 
 .search-container-results-btn:hover button {
-    color: #8ab4f8;
+    color: var(--blue);
 }
 
 .sub-search-button-wrapper img {
@@ -724,7 +993,7 @@ p {
 .snip_title {
     margin-top: 0;
     margin-bottom: 0;
-    color: #bcc0c3;
+    color: var(--highlight);
     font-weight: bold;
     font-style: normal;
     max-width: 48em;
@@ -831,6 +1100,10 @@ p {
         font-size: 13px;
     }
 
+    .calc {
+        left: 20px;
+    }
+
     .results h3,
     .result_sublink h3 {
         font-size: 16px;
@@ -855,8 +1128,15 @@ p {
     }
 
     .settings {
-        max-width: 300px;
-        margin-left: 10px;
+        max-width: 100%;
+        margin-left: 0px;
+        overflow-x: hidden;
+        background: inherit;
+        margin-top: 10px;
+        border-radius: 0px;
+        margin-bottom: 70px;
+        border-left: none;
+        border-right: none;
     }
 
     #theme {
@@ -870,7 +1150,7 @@ p {
     .footer a {
         margin-left: -13px;
         font-size: 14px;
-        padding-right: 0px;
+        padding-right: 10px;
     }
 
     .wrapper {
@@ -883,7 +1163,7 @@ p {
         margin-right: auto;
         display: block;
         margin-top: 0px;
-        top: 130px;
+        top: 110px;
         left: 4px;
     }
 
@@ -954,6 +1234,23 @@ p {
         margin-left: 3px;
     }
 
+    .image_view {
+        width: 100%;
+        height: 77%;
+        margin-top: -33px;
+        margin-right: 0%;
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+    }
+
+    .view-image img {
+        max-height: 250px;
+    }
+
+    .images {
+        margin-right: 1.2% !important;
+    }
+
     .logomobile {
         position: relative;
         float: none;
@@ -974,13 +1271,15 @@ p {
     }
 
     .sub-search-button-wrapper {
-        margin-right: 0;
-        margin-left: 24px;
-        margin-top: 0;
-        margin-bottom: 0;
+        margin: 0;
         padding: 0;
         display: flex;
         align-items: baseline;
+        justify-content: center;
+    }
+
+    .fetched_tor {
+        margin-top: 135px !important;
     }
 
     .sub-search-button-wrapper img {
@@ -989,7 +1288,8 @@ p {
     }
 
     .sub-search-button-wrapper button {
-        margin-right: 14px;
+        margin-right: 4px;
+        margin-left: 4px;
         padding: 0;
         display: flex;
         flex-direction: column;
@@ -997,6 +1297,10 @@ p {
         font-size: 14px;
         margin-top: 46px;
         padding-bottom: 5px;
+    }
+
+    .save {
+        margin-left: 28px;
     }
 
     .results {
@@ -1035,6 +1339,16 @@ p {
         margin-top: -2px;
     }
 
+    .fetched_img {
+        margin-top: 135px !important;
+        margin-left: 1.2% !important;
+        left: 0px !important;
+    }
+
+    .fetched_vid {
+        margin-top: 135px !important;
+    }
+
     .results_settings {
         left: 20px;
         font-size: 13px;
@@ -1057,10 +1371,12 @@ p {
     .search-container h1 {
         font-size: 55px;
         margin-bottom: 70px;
+        margin-top: 15px;
     }
 
     .search-container {
-        margin-top: 10%;
+        position: absolute;
+        width: 100%;
         text-align: center;
     }
 

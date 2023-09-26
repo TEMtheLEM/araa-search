@@ -8,7 +8,8 @@
         <p>Change the look of TailsX</p>
         <select id="theme" name="theme">
             <option value="light" {% if theme == 'light' %}selected{% endif %}>Light</option>
-            <option value="dark_blur" {% if theme == 'dark_blur' %}selected{% endif %}>Dark Beta</option>
+            <option value="dark_blur" {% if theme == 'dark_blur' %}selected{% endif %}>Dark (Default)</option>
+            <option value="dark_default" {% if theme == 'dark_default' %}selected{% endif %}>Dark (no background)</option>
             <option value="dark" {% if theme == 'dark' %}selected{% endif %}>Dark</option>
             <option value="darker" {% if theme == 'darker' %}selected{% endif %}>Darker</option>
             <option value="github_night" {% if theme == 'github_night' %}selected{% endif %}>Github Night</option>
@@ -88,6 +89,11 @@
         <select id="open-new-tab" name="new_tab">
             <option value="" {% if new_tab == '' %}selected{% endif %}>New Tab Off</option>
             <option value="active" {% if new_tab == 'active' %}selected{% endif %}>New Tab On</option>
+        </select>
+        <p>Disabling JavaScript (not recommended) affects webpage features, disables autocomplete, and slows certain functions. Keeping JavaScript enabled won't compromise your privacy, as requests are processed through server-side endpoints.</p>
+        <select id="javascript-setting" name="javascript">
+            <option value="enabled" {% if javascript == 'enabled' %}selected{% endif %}>JavaScript Enabled</option>
+            <option value="" {% if javascript == '' %}selected{% endif %}>JavaScript Disabled</option>
         </select>
     </form>
     </div>
