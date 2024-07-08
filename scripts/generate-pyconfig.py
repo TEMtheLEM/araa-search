@@ -47,17 +47,17 @@ ENV_VARS = {
         'type': bool,
     },
     'PIPED_INSTANCE': {
-        'default_val': 'yt.extravi.dev',
+        'default_val': 'yt.ttj.dev',
         'pyname': 'PIPED_INSTANCE',
         'type': str,
     },
     'PIPED_API': {
-        'default_val': 'ytapi.extravi.dev',
+        'default_val': 'ytapi.ttj.dev',
         'pyname': 'PIPED_INSTANCE_API',
         'type': str,
     },
     'PIPED_PROXY': {
-        'default_val': 'ytproxy.extravi.dev',
+        'default_val': 'ytproxy.ttj.dev',
         'pyname': 'PIPED_INSTANCE_PROXY',
         'type': str,
     },
@@ -107,7 +107,7 @@ ENV_VARS = {
         'type': str,
     },
     'ENGINE_RATELIMIT_COOLDOWN': {
-        'default_val': 10,
+        'default_val': 28,
         'pyname': 'ENGINE_RATELIMIT_COOLDOWN_MINUTES',
         'type': int,
     },
