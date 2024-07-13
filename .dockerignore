@@ -4,3 +4,4 @@
 compose.yaml
 *.md
 LICENSE
+.env
