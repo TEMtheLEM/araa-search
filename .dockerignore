@@ -1,6 +1,6 @@
 *.dockerfile
 .*
-!.git
+!.git/refs/heads/main
 compose.yaml
 *.md
 LICENSE
