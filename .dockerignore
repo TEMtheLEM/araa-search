@@ -1,7 +1,9 @@
 *.dockerfile
+Dockerfile
 .*
 !.git/refs/heads/main
-compose.yaml
+compose*
 *.md
 LICENSE
 .env
+venv
