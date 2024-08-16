@@ -1,41 +1,46 @@
 FROM python:3.12.4-alpine AS builder
 
+ARG TARGETARCH
+
 # Container metadata.
 LABEL title="Araa Search" \
-      description="A privacy-respecting, ad-free, self-hosted Google metasearch engine with strong security and full API support." \
-      git_repo="https://github.com/TEMtheLEM/araa-search" \
-      authors="https://github.com/Extravi/araa-search/contributors" \
-      maintainer="TEMtheLEM <temthelem@duck.com>" \
-      image="https://hub.docker.com/r/temthelem/araa-search"
+    description="A privacy-respecting, ad-free, self-hosted Google metasearch engine with strong security and full API support." \
+    git_repo="https://github.com/TEMtheLEM/araa-search" \
+    authors="https://github.com/Extravi/araa-search/contributors" \
+    maintainer="TEMtheLEM <temthelem@duck.com>" \
+    image="https://hub.docker.com/r/temthelem/araa-search"
 
 WORKDIR /build
 
-# Packages needed to build lxml on 32-bit platforms
-RUN apk add --update --no-cache --virtual .build_deps \
-        pkgconf \
-        zlib-dev \
-        xz \
-        xz-dev \
-        libxml2 \
-        libxml2-utils \
-        libxml2-dev \
-        libgpg-error \
-        libgcrypt \
-        libxslt \
-        libxslt-dev \
-        libgcc \
-        jansson \
-        libstdc++ \
-        zstd-libs \
-        binutils \
-        libgomp \
-        libatomic \
-        gmp \
-        isl26 \
-        mpfr4 \
-        mpc1 \
-        gcc \
-        musl-dev
+# Packages needed to build lxml on 32-bit platforms.
+# Not required for 64-bit.
+RUN if ! [[ $TARGETARCH = *64* ]]; then \
+    apk add --update --no-cache --virtual .build_deps \
+    pkgconf \
+    zlib-dev \
+    xz \
+    xz-dev \
+    libxml2 \
+    libxml2-utils \
+    libxml2-dev \
+    libgpg-error \
+    libgcrypt \
+    libxslt \
+    libxslt-dev \
+    libgcc \
+    jansson \
+    libstdc++ \
+    zstd-libs \
+    binutils \
+    libgomp \
+    libatomic \
+    gmp \
+    isl26 \
+    mpfr4 \
+    mpc1 \
+    gcc \
+    musl-dev; \
+    fi
 
 COPY requirements.txt .
 
@@ -51,9 +56,9 @@ ARG TARGETARCH
 # Both of these packages are needed for lxml to work on 32-bit platforms.
 # Package installation can be skipped on 64-bit platforms.
 RUN if ! [[ $TARGETARCH = *64* ]]; then \
-        apk add --update --no-cache \
-        libxml2 \
-        libxslt; \
+    apk add --update --no-cache \
+    libxml2 \
+    libxslt; \
     fi
 
 COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
