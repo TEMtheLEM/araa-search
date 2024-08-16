@@ -58,13 +58,13 @@ function mapToValidLanguage(userLanguage) {
 }
 
 function setLanguageCookie() {
-    const userLanguage = navigator.language.toLowerCase();
-    const mappedLanguage = mapToValidLanguage(userLanguage);
-    setCookie("ux_lang", mappedLanguage);
-    if (mappedLanguage != "english") {
-        // Default language is english, so only refresh if lang != english
-        window.location.reload();
-    }
+  const userLanguage = navigator.language.toLowerCase();
+  const mappedLanguage = mapToValidLanguage(userLanguage);
+  setCookie("ux_lang", mappedLanguage);
+  if (mappedLanguage != "english") {
+    // Default language is english, so only refresh if lang != english
+    window.location.reload();
+  }
 }
 
 if (!document.cookie.includes("ux_lang") && navigator.cookieEnabled) {
