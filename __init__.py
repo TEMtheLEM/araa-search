@@ -144,7 +144,7 @@ def wikipedia():
         query = request.args.get("q", "").strip()
     else:
         query = request.form.get("q", "").strip()
-    response, _ = helpers.makeHTMLRequest(f"https://wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&titles={quote(query)}&pithumbsize=500", is_wiki=True)
+    response, _ = helpers.makeHTMLRequest(f"https://wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&titles={quote(query)}&pithumbsize=500", http_session="wiki")
     return json.loads(response.text)
 
 
