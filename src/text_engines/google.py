@@ -15,7 +15,7 @@ def search(query: str, page: int, search_type: str, user_settings: helpers.Setti
     if search_type == "reddit":
         query += " site:reddit.com"
 
-    soup, response_code = helpers.makeHTMLRequest(f"https://www.google.com{user_settings.domain}&q={quote(query)}&start={page}&lr={user_settings.lang}&num=20&safe={user_settings.safe}", is_google=True)
+    soup, response_code = helpers.makeHTMLRequest(f"https://www.google.com{user_settings.domain}&q={quote(query)}&start={page}&lr={user_settings.lang}&num=20&safe={user_settings.safe}", http_session="google")
 
     if response_code != 200:
         return FullEngineResults(engine="google", search_type=search_type, ok=False, code=response_code)
@@ -78,7 +78,7 @@ def search(query: str, page: int, search_type: str, user_settings: helpers.Setti
         else:
             rkno_title = ""
 
-    for div in soup.find_all("div", {'class': 'nnFGuf'}): 
+    for div in soup.find_all("div", {'class': 'nnFGuf'}):
         div.decompose()
 
     # retrieve featured snippet
