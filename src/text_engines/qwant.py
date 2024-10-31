@@ -34,9 +34,6 @@ def search(query: str, page: int, search_type: str, user_settings: helpers.Setti
         "https://api.qwant.com/v3/search/web?{}".format(urlencode(url_args)),
         http_session="qwant"
     )
-    print(
-        "https://api.qwant.com/v3/search/web?{}".format(urlencode(url_args)),
-    )
 
     if code == 403 and user_settings.safe == "active":
         # Qwant returns 403 when safesearch restricted all content.
