@@ -3,7 +3,7 @@ services:
     container_name: Araa
     image: docker.io/temthelem/araa-search:latest
     env_file:
-      - .env # May be redundant. Who cares ¯\_(ツ)_/¯
+      - .env # May be redundant; docker compose should load the .env file by default. It's just here to be explicit.
     ports:
       - "${PORT}:${PORT}"
   watchtower: # Not required. Keeps containers up-to-date.
