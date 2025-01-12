@@ -93,11 +93,11 @@ def search(query: str, page: int, search_type: str, user_settings: helpers.Setti
             wiki_proxy_link, wiki_image = helpers.grab_wiki_image_from_url(result['url'], user_settings)
 
             wiki = WikiSnippet(
-                title = result['title'],
-                desc = sanitize_wiki(result['desc']),
-                link = result['url'],
-                image = wiki_image,
-                wiki_thumb_proxy_link = wiki_proxy_link,
+                title=result['title'],
+                desc=sanitize_wiki(result['desc']),
+                link=result['url'],
+                image=wiki_image,
+                wiki_thumb_proxy_link=wiki_proxy_link,
             )
 
     spell = json_data['data']['query']['queryContext'].get('alteredQuery', '')
