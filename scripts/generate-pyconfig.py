@@ -2,10 +2,10 @@
 # This python script was made to generate a suitable `/_config.py`
 # using the current environment variables OR the defaults specified in
 # the dictionary below.
-# 
+#
 # This script uses `/resource/_config.py.gen.template` as a template
 # for the generated `/_config.py`
-# 
+#
 # Also, it's meant to be ran with the cwd at the root of this repository.
 
 # A reference for acceptable environment variables & how to use them
@@ -110,6 +110,11 @@ ENV_VARS = {
         'default_val': 28,
         'pyname': 'ENGINE_RATELIMIT_COOLDOWN_MINUTES',
         'type': int,
+    },
+    'ARAA_NAME': {
+        'default_val': 'Araa',
+        'pyname': 'ARAA_NAME',
+        'type': str,
     },
 }
 
