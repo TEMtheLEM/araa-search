@@ -11,7 +11,7 @@ from src.text_engines import google, qwant, mullvad
 # `MAINTENANCE_MODE` config below so engines under maintenance
 # are not used by the instance.
 ENGINES = [
-    google,
+    # google,  # BUG: doesn't work at the moment, google killed JS-less searches
     qwant,
     mullvad,
 ]
