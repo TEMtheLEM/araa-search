@@ -8,7 +8,7 @@ from math import isclose  # For float comparisons
 from src.text_engines import google, qwant
 
 ENGINES = [
-    google,
+    # google,  # BUG: doesn't work at the moment, google killed JS-less searches
     qwant,
 ]
 ratelimited_timestamps = {}
