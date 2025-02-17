@@ -70,7 +70,8 @@ def settings():
                            settings=settings,
                            lang_data=lang_data,
                            UX_LANGUAGES=UX_LANGUAGES,
-                           araa_name=ARAA_NAME
+                           araa_name=ARAA_NAME,
+                           torrent_enabled=TORRENTSEARCH_ENABLED
                            )
 
 
@@ -97,7 +98,10 @@ def discover():
 
 @app.route('/save-settings', methods=['POST'])
 def save_settings():
-    cookies = ['safe', 'javascript', 'domain', 'theme', 'lang', 'ux_lang', 'new_tab', 'method', 'ac']
+    cookies = [
+        'safe', 'javascript', 'domain', 'theme', 'lang',
+        'ux_lang', 'new_tab', 'method', 'ac', 'engine', 'torrent'
+    ]
 
     response = make_response(redirect(request.referrer))
     for cookie in cookies:
@@ -107,9 +111,26 @@ def save_settings():
                                 max_age=COOKIE_AGE, httponly=False,
                                 secure=app.config.get("HTTPS")
                                 )
+
     response.headers["Location"] = request.form.get('past')
 
+    # Disable https when running in a debug mode to avoid ssl errors
+    if __name__ == "__main__":
+        response.headers["Location"] = response.headers["Location"].replace("https", "http")
+
     return response
+
+
+language_dict = {
+    "lang_en": "us-en", "lang_af": "za-af", "lang_ar": "ae-ar", "lang_hy": "am-hy", "lang_be": "by-be", "lang_bg": "bg-bg",
+    "lang_ca": "es-ca", "lang_zh": "cn-zh", "lang_hr": "hr-hr", "lang_cs": "cz-cs", "lang_da": "dk-da", "lang_nl": "nl-nl",
+    "lang_eo": "eo-eo", "lang_et": "ee-et", "lang_tl": "ph-tl", "lang_fi": "fi-fi", "lang_fr": "fr-fr", "lang_de": "de-de",
+    "lang_el": "gr-el", "lang_iw": "il-iw", "lang_hi": "in-hi", "lang_hu": "hu-hu", "lang_is": "is-is", "lang_id": "id-id",
+    "lang_it": "it-it", "lang_ja": "jp-ja", "lang_ko": "kr-ko", "lang_lv": "lv-lv", "lang_lt": "lt-lt", "lang_no": "no-no",
+    "lang_fa": "ir-fa", "lang_pl": "pl-pl", "lang_pt": "pt-pt", "lang_ro": "ro-ro", "lang_ru": "ru-ru", "lang_sr": "rs-sr",
+    "lang_sk": "sk-sk", "lang_sl": "si-sl", "lang_es": "es-es", "lang_sw": "tz-sw", "lang_sv": "se-sv", "lang_th": "th-th",
+    "lang_tr": "tr-tr", "lang_uk": "ua-uk", "lang_vi": "vn-vi"
+}
 
 
 @app.route("/suggestions")
@@ -122,11 +143,12 @@ def suggestions():
     else:
         query = request.form.get("q", "").strip()
 
+    location = language_dict.get(settings.lang, "us-en")
     if settings.ac == "ddg":
-        response = ac.get(f"https://ac.duckduckgo.com/ac?q={quote(query)}&type=list")
+        response = ac.get(f"https://ac.duckduckgo.com/ac?q={quote(query)}&type=list&kl={location}")
         return json.loads(response.text)
 
-    response = googleac.get(f"https://suggestqueries.google.com/complete/search?client=firefox&q={quote(query)}")
+    response = googleac.get(f"https://suggestqueries.google.com/complete/search?client=firefox&q={quote(query)}&hl={location}")
     suggestions_list = json.loads(response.text)
 
     # remove items at index 2 and 3
@@ -263,18 +285,19 @@ def search():
             return app.redirect(bang_url.format(q=query))
 
     # type of search (text, image, etc.)
-    type = args.get("t", "text")
+    search_type = args.get("t", "text")
 
-    # render page based off of type
-    match type:
-        case "torrent":
+    # render page based off of search_type
+    if search_type == "torrent":
+        if TORRENTSEARCH_ENABLED:
             return torrents.torrentResults(query)
-        case "video":
-            return video.videoResults(query)
-        case "image":
-            return images.imageResults(query)
-        case _:
-            return textResults.textResults(query)
+        return redirect("/")
+    elif search_type == "video":
+        return video.videoResults(query)
+    elif search_type == "image":
+        return images.imageResults(query)
+    else:
+        return textResults.textResults(query)
 
 
 if __name__ == "__main__":
