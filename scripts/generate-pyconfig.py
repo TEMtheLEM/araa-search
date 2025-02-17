@@ -116,6 +116,11 @@ ENV_VARS = {
         'pyname': 'ARAA_NAME',
         'type': str,
     },
+    'DEFAULT_ENGINE' : {
+        'default_val': 'google',
+        'pyname': 'DEFAULT_ENGINE',
+        'type': str,
+    },
 }
 
 import os
