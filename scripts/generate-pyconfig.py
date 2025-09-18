@@ -1,4 +1,4 @@
-#!/bin/python
+#!/usr/bin/env python3
 # This python script was made to generate a suitable `/_config.py`
 # using the current environment variables OR the defaults specified in
 # the dictionary below.

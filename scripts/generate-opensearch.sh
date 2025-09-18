@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Generates the opensearch.xml file based off of a $DOMAIN env. var.
 # Fails if $DOMAIN is blank or not set.
 

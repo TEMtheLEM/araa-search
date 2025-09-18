@@ -193,7 +193,7 @@ class Settings():
 # will be None).
 #
 # NOTE: This function may return (None, None) in cases of failure.
-def grab_wiki_image_from_url(wikipedia_url: str, user_settings: Settings) -> tuple[str | None]:
+def grab_wiki_image_from_url(wikipedia_url: str, user_settings: Settings) -> tuple[str | None, str | None]:
     kno_title = None
     kno_image = None
 
