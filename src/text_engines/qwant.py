@@ -94,13 +94,13 @@ def search(query: str, page: int, search_type: str, user_settings: helpers.Setti
         ))
 
         # wikipedia snippet scraper
-        if wiki is None and 'wikipedia.org' in urlparse(result['source']).netloc:
-            wiki_proxy_link, wiki_image = helpers.grab_wiki_image_from_url(result['source'], user_settings)
+        if wiki is None and 'wikipedia.org' in urlparse(result['url']).netloc:
+            wiki_proxy_link, wiki_image = helpers.grab_wiki_image_from_url(result['url'], user_settings)
 
             wiki = WikiSnippet(
                 title=result['title'],
                 desc=sanitize_wiki(result['desc']),
-                link=result['source'],
+                link = result['url'],
                 image=wiki_image,
                 wiki_thumb_proxy_link=wiki_proxy_link,
             )
