@@ -11,125 +11,125 @@
 # A reference for acceptable environment variables & how to use them
 # for `/_config.py`
 ENV_VARS = {
-    'PORT': { # Name of the env. var.
-        'default_val': 8000, # Default value (obvious)
-        'pyname': 'PORT', # The name of the variable in Python (_config.py)
-        'type': int, # Type of the variable
+    "PORT": {  # Name of the env. var.
+        "default_val": 8000,  # Default value (obvious)
+        "pyname": "PORT",  # The name of the variable in Python (_config.py)
+        "type": int,  # Type of the variable
     },
-    'SHEBANG': {
-        'default_val': '!',
-        'pyname': 'BANG',
-        'type': str,
+    "SHEBANG": {
+        "default_val": "!",
+        "pyname": "BANG",
+        "type": str,
     },
-    'ORIGIN_REPO': {
-        'default_val': 'https://github.com/Extravi/araa-search',
-        'pyname': 'REPO',
-        'type': str,
+    "ORIGIN_REPO": {
+        "default_val": "https://github.com/Extravi/araa-search",
+        "pyname": "REPO",
+        "type": str,
     },
-    'DONATE_URL': {
-        'default_val': 'https://github.com/sponsors/Extravi',
-        'pyname': 'DONATE',
-        'type': str,
+    "DONATE_URL": {
+        "default_val": "https://github.com/sponsors/Extravi",
+        "pyname": "DONATE",
+        "type": str,
     },
-    'DEFAULT_THEME': {
-        'default_val': 'dark_blur',
-        'pyname': 'DEFAULT_THEME',
-        'type': str,
+    "DEFAULT_THEME": {
+        "default_val": "dark_blur",
+        "pyname": "DEFAULT_THEME",
+        "type": str,
     },
-    'ENABLE_API': {
-        'default_val': False,
-        'pyname': 'API_ENABLED',
-        'type': bool,
+    "ENABLE_API": {
+        "default_val": False,
+        "pyname": "API_ENABLED",
+        "type": bool,
     },
-    'ENABLE_TORRENTS': {
-        'default_val': True,
-        'pyname': 'TORRENTSEARCH_ENABLED',
-        'type': bool,
+    "ENABLE_TORRENTS": {
+        "default_val": True,
+        "pyname": "TORRENTSEARCH_ENABLED",
+        "type": bool,
     },
-    'PIPED_INSTANCE': {
-        'default_val': 'yt.ttj.dev',
-        'pyname': 'PIPED_INSTANCE',
-        'type': str,
+    "PIPED_INSTANCE": {
+        "default_val": "yt.ttj.dev",
+        "pyname": "PIPED_INSTANCE",
+        "type": str,
     },
-    'PIPED_API': {
-        'default_val': 'ytapi.ttj.dev',
-        'pyname': 'PIPED_INSTANCE_API',
-        'type': str,
+    "PIPED_API": {
+        "default_val": "ytapi.ttj.dev",
+        "pyname": "PIPED_INSTANCE_API",
+        "type": str,
     },
-    'PIPED_PROXY': {
-        'default_val': 'ytproxy.ttj.dev',
-        'pyname': 'PIPED_INSTANCE_PROXY',
-        'type': str,
+    "PIPED_PROXY": {
+        "default_val": "ytproxy.ttj.dev",
+        "pyname": "PIPED_INSTANCE_PROXY",
+        "type": str,
     },
-    'TORRENTGALAXY_DOMAIN': {
-        'default_val': 'torrentgalaxy.to',
-        'pyname': 'TORRENTGALAXY_DOMAIN',
-        'type': str,
+    "TORRENTGALAXY_DOMAIN": {
+        "default_val": "torrentgalaxy.to",
+        "pyname": "TORRENTGALAXY_DOMAIN",
+        "type": str,
     },
-    'NYAA_DOMAIN': {
-        'default_val': 'nyaa.si',
-        'pyname': 'NYAA_DOMAIN',
-        'type': str,
+    "NYAA_DOMAIN": {
+        "default_val": "nyaa.si",
+        "pyname": "NYAA_DOMAIN",
+        "type": str,
     },
-    'APIBAY_DOMAIN': {
-        'default_val': 'apibay.org',
-        'pyname': 'API_BAY_DOMAIN',
-        'type': str,
+    "APIBAY_DOMAIN": {
+        "default_val": "apibay.org",
+        "pyname": "API_BAY_DOMAIN",
+        "type": str,
     },
-    'RUTOR_DOMAIN': {
-        'default_val': 'rutor.info',
-        'pyname': 'RUTOR_DOMAIN',
-        'type': str,
+    "RUTOR_DOMAIN": {
+        "default_val": "rutor.info",
+        "pyname": "RUTOR_DOMAIN",
+        "type": str,
     },
-    'TORRENT_SITES': {
-        'default_val': [
-            'nyaa',
-            'torrentgalaxy',
-            'tpb',
-            'rutor',
+    "TORRENT_SITES": {
+        "default_val": [
+            "nyaa",
+            "torrentgalaxy",
+            "tpb",
+            "rutor",
         ],
-        'pyname': 'ENABLED_TORRENT_SITES',
-        'type': list,
+        "pyname": "ENABLED_TORRENT_SITES",
+        "type": list,
     },
-    'DEFAULT_METHOD': {
-        'default_val': 'GET',
-        'pyname': 'DEFAULT_METHOD',
-        'type': str,
+    "DEFAULT_METHOD": {
+        "default_val": "GET",
+        "pyname": "DEFAULT_METHOD",
+        "type": str,
     },
-    'DEFAULT_AC_ENGINE': {
-        'default_val': 'google',
-        'pyname': 'DEFAULT_AUTOCOMPLETE',
-        'type': str,
+    "DEFAULT_AC_ENGINE": {
+        "default_val": "google",
+        "pyname": "DEFAULT_AUTOCOMPLETE",
+        "type": str,
     },
-    'DEFAULT_LANG': {
-        'default_val': 'english',
-        'pyname': 'DEFAULT_UX_LANG',
-        'type': str,
+    "DEFAULT_LANG": {
+        "default_val": "english",
+        "pyname": "DEFAULT_UX_LANG",
+        "type": str,
     },
-    'ENGINE_RATELIMIT_COOLDOWN': {
-        'default_val': 28,
-        'pyname': 'ENGINE_RATELIMIT_COOLDOWN_MINUTES',
-        'type': int,
+    "ENGINE_RATELIMIT_COOLDOWN": {
+        "default_val": 28,
+        "pyname": "ENGINE_RATELIMIT_COOLDOWN_MINUTES",
+        "type": int,
     },
-    'ARAA_NAME': {
-        'default_val': 'Araa',
-        'pyname': 'ARAA_NAME',
-        'type': str,
+    "ARAA_NAME": {
+        "default_val": "Araa",
+        "pyname": "ARAA_NAME",
+        "type": str,
     },
-    'DEFAULT_ENGINE' : {
-        'default_val': 'google',
-        'pyname': 'DEFAULT_ENGINE',
-        'type': str,
+    "DEFAULT_ENGINE": {
+        "default_val": "google",
+        "pyname": "DEFAULT_ENGINE",
+        "type": str,
     },
 }
 
 import os
 
-config_py = open('_config.py', 'w')
+config_py = open("_config.py", "w")
 
 # Write a disclaimer saying that this file was automatically generated.
 config_py.write(
-    '# This _config.py was automatically generated using scripts/generate-pyconfig.py.\n'
+    "# This _config.py was automatically generated using scripts/generate-pyconfig.py.\n"
 )
 
 for env_var in ENV_VARS.keys():
@@ -137,21 +137,21 @@ for env_var in ENV_VARS.keys():
 
     # If environ.get() returns None (the env. var. wasn't supplied), or
     # the value is blank, then fall back on the default.
-    if val == None or val == "":
-        val = ENV_VARS[env_var]['default_val']
+    if val is None or val == "":
+        val = ENV_VARS[env_var]["default_val"]
         # Wrap strings with quotes
-        pretty_val = f"'{val}'" if ENV_VARS[env_var]['type'] == str else val
+        pretty_val = f"'{val}'" if ENV_VARS[env_var]["type"] is str else val
         print(f"Config var. '{env_var}' not specified. Defaulting to {pretty_val}.")
 
     # Put quotes around each variable if it's a string.
-    if ENV_VARS[env_var]['type'] == str:
+    if ENV_VARS[env_var]["type"] is str:
         val = f"'{val}'"
 
     config_py.write(f"{ENV_VARS[env_var]['pyname']}={val}\n")
 
 # Write the rest of the template's variables.
 # These variables are not yet configurable with this generator.
-conf_template = open('resources/_config.py.gen.template', 'r')
+conf_template = open("resources/_config.py.gen.template", "r")
 config_py.write(conf_template.read())
 conf_template.close()
 
