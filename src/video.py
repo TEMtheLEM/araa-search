@@ -38,7 +38,7 @@ def videoResults(query) -> Response:
     api = args.get("api", "false")
 
     # grab & format webpage
-    soup, response_code = makeHTMLRequest(f"https://{PIPED_INSTANCE_API}/search?q={quote(query)}&filter=all", is_piped=True)
+    soup, response_code = makeHTMLRequest(f"https://{PIPED_INSTANCE_API}/search?q={quote(query)}&filter=all", http_session="piped")
     data = json.loads(soup.text)
 
     # retrieve links

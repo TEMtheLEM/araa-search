@@ -32,7 +32,7 @@ wiki = httpx.Client(http2=True, follow_redirects=True, transport=transport, limi
 piped = httpx.Client(http2=True, follow_redirects=True, transport=transport, limits=limits)  # piped
 qwant = httpx.Client(http2=True, follow_redirects=True, transport=transport, limits=limits)  # qwant
 
-def makeHTMLRequest(url: str, is_google=False, is_wiki=False, is_piped=False):
+def makeHTMLRequest(url: str, http_session: str | None = None):
     # block unwanted request from an edited cookie
     domain = unquote(url).split('/')[2]
     if domain not in WHITELISTED_DOMAINS:
@@ -50,16 +50,19 @@ def makeHTMLRequest(url: str, is_google=False, is_wiki=False, is_piped=False):
         "Sec-Fetch-User": "?1",
         "Upgrade-Insecure-Requests": "1"
     }
-    
-    # Grab HTML content with the specific cookie
-    if is_google:
-        html = google.get(url, headers=headers) # persistent session for google
-    elif is_wiki:
-        html = wiki.get(url, headers=headers) # persistent session for wikipedia
-    elif is_piped:
-        html = piped.get(url, headers=headers) # persistent session for piped
-    else:
-        html = s.get(url, headers=headers) # generic persistent session
+
+    # Grab HTML content
+    match http_session:
+        case "google":
+            html = google.get(url, headers=headers)
+        case "wiki":
+            html = wiki.get(url, headers=headers)
+        case "piped":
+            html = piped.get(url, headers=headers)
+        case "qwant":
+            html = qwant.get(url, headers=headers)
+        case _:
+            html = s.get(url, headers=headers)
 
     # Allow for callers to handle errors better
     content = None if html.status_code != 200 else BeautifulSoup(html.text, "lxml")
@@ -90,7 +93,7 @@ def latest_commit():
             return f.readline()
     return "Not in main branch"
 
-def makeJSONRequest(url: str, is_qwant=False):
+def makeJSONRequest(url: str, http_session: str | None = None):
     # block unwanted request from an edited cookie
     domain = unquote(url).split('/')[2]
     if domain not in WHITELISTED_DOMAINS:
@@ -100,10 +103,17 @@ def makeJSONRequest(url: str, is_qwant=False):
     user_agent = random.choice(user_agents)
     headers = {"User-Agent": user_agent}
     # Grab json content
-    if is_qwant:
-        response = qwant.get(url, headers=headers) # persistent session for qwant
-    else:
-        response = s.get(url, headers=headers) # generic persistent session
+    match http_session:
+        case "google":
+            response = google.get(url, headers=headers)
+        case "wiki":
+            response = wiki.get(url, headers=headers)
+        case "piped":
+            response = piped.get(url, headers=headers)
+        case "qwant":
+            response = qwant.get(url, headers=headers)
+        case _:
+            response = s.get(url, headers=headers)
 
     # Try to parse JSON; if the response isn't valid JSON, return None and
     # log the response text for debugging instead of raising an exception.
@@ -178,10 +188,10 @@ class Settings():
 # Returns a tuple of two ellements.
 # The first is the wikipedia proxy's URL (used to load an wiki page's image after page load),
 # and the second is an image proxy link for the very image of the page itself.
-# 
+#
 # Either the first or second ellement will be a string, but not both (at least one ellement
 # will be None).
-# 
+#
 # NOTE: This function may return (None, None) in cases of failure.
 def grab_wiki_image_from_url(wikipedia_url: str, user_settings: Settings) -> tuple[str | None]:
     kno_title = None
@@ -193,7 +203,7 @@ def grab_wiki_image_from_url(wikipedia_url: str, user_settings: Settings) -> tup
     else:
         try:
             _kno_title = wikipedia_url.split("/")[-1]
-            soup = makeHTMLRequest(f"https://wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&titles={_kno_title}&pithumbsize=500", is_wiki=True)
+            soup = makeHTMLRequest(f"https://wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&titles={_kno_title}&pithumbsize=500", http_session="wiki")
             data = json.loads(soup.text)
             img_src = data['query']['pages'][list(data['query']['pages'].keys())[0]]['thumbnail']['source']
             _kno_image = [f"/img_proxy?url={img_src}"]

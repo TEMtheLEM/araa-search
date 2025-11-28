@@ -13,18 +13,6 @@ import random
 #import logging, timeit
 #logging.basicConfig(level=logging.DEBUG, format="%(message)s")
 
-# Force all requests to only use IPv4
-requests.packages.urllib3.util.connection.HAS_IPV6 = False
-
-# Force all HTTPX requests to only use IPv4
-transport = httpx.HTTPTransport(local_address="0.0.0.0")
-
-# Pool limit configuration
-limits = httpx.Limits(max_keepalive_connections=None, max_connections=None, keepalive_expiry=None)
-
-# Make a persistent session
-qwant = httpx.Client(http2=True, follow_redirects=True, transport=transport, limits=limits)
-
 def imageResults(query) -> Response:
     # get user language settings
     settings = helpers.Settings()
@@ -51,9 +39,7 @@ def imageResults(query) -> Response:
     safe_search = int(settings.safe == "active")
 
     # grab & format webpage
-    user_agent = random.choice(user_agents)
-    headers = {"User-Agent": user_agent}
-    response = qwant.get(f"https://api.qwant.com/v3/search/images?t=images&q={quote(query)}&count=50&locale=en_CA&offset={p}&device=desktop&tgp=2&safesearch={safe_search}", headers=headers)
+    json_data, _ = helpers.makeJSONRequest(f"https://api.qwant.com/v3/search/images?t=images&q={quote(query)}&count=50&locale=en_CA&offset={p}&device=desktop&tgp=2&safesearch={safe_search}", http_session="qwant")
 
     # If the image engine returned a non-200 response or invalid JSON,
     # handle it gracefully by rendering the images template with no

@@ -48,7 +48,7 @@ def search(query: str, page: int, search_type: str, user_settings: helpers.Setti
     }
     link = f"https://www.google.com{user_settings.domain}&" + urlencode(link_args)
 
-    soup, response_code = helpers.makeHTMLRequest(link, is_google=True)
+    soup, response_code = helpers.makeHTMLRequest(link, http_session="google")
 
     if response_code != 200:
         return FullEngineResults(engine="google", search_type=search_type, ok=False, code=response_code)
@@ -111,7 +111,7 @@ def search(query: str, page: int, search_type: str, user_settings: helpers.Setti
         else:
             rkno_title = ""
 
-    for div in soup.find_all("div", {'class': 'nnFGuf'}): 
+    for div in soup.find_all("div", {'class': 'nnFGuf'}):
         div.decompose()
 
     # retrieve featured snippet

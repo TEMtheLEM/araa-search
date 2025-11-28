@@ -32,7 +32,7 @@ def search(query: str, page: int, search_type: str, user_settings: helpers.Setti
 
     json_data, code = helpers.makeJSONRequest(
         "https://api.qwant.com/v3/search/web?{}".format(urlencode(url_args)),
-        is_qwant=True
+        http_session="qwant"
     )
     print(
         "https://api.qwant.com/v3/search/web?{}".format(urlencode(url_args)),
