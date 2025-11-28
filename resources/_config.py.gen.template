@@ -32,6 +32,7 @@ WHITELISTED_DOMAINS=[
     NYAA_DOMAIN,
     API_BAY_DOMAIN,
     RUTOR_DOMAIN,
+    "leta.mullvad.net",
 ]
 TORRENT_TRACKERS = [
     'http://nyaa.tracker.wf:7777/announce',
